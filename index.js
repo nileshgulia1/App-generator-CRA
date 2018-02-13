@@ -2,10 +2,12 @@
 
 let shell = require('shelljs')
 let colors = require('colors')
-let fs = require('fs') //fs already comes included with node.
+let fs = require('fs') 
 
-let appName = process.argv[2]
-let appDirectory = `${process.cwd()}/${appName}`
+//functions container
+
+let appName = process.argv[2] //it  will pull the provided app name out of the parameters of our shell command.
+let appDirectory = `${process.cwd()}/${appName}` //store the path to the directory that CRA is going to create.
 
 const run = async () => {
   let success = await createReactApp()
