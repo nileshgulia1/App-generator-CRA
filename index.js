@@ -38,3 +38,26 @@ const createReactApp = () => {
     }
   })
 }
+// Display the most elegant way to cd.
+/*
+  let cdpath;
+  if (appDirectory && path.join(appDirectory, appName) === appPath) {
+    cdpath = appName;
+  } else {
+    cdpath = appPath;
+  }
+  */
+const cdIntoNewApp = () => {
+  return new Promise(resolve=>{
+    shell.exec(`cd ${appName}`, ()=>{resolve()})
+  })
+}
+const installPackages = () => {
+  return new Promise(resolve=>{
+    console.log("\n@plone/plone-react,plonetheme-webpack-plugin, webpack \n")
+    shell.exec(`npm install --save  @plone/plone-react plonetheme-webpack-plugin webpack`, () => {
+      console.log("\nFinished installing packages\n")
+      resolve()
+    })
+  })
+}
