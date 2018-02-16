@@ -4,7 +4,8 @@
   "description": "It is a plone app generator using CRA ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-start": "nodemon index.js"
   },
   "repository": {
     "type":"git",
@@ -16,5 +17,8 @@
   "dependencies": {
     "colors": "^1.1.2",
     "shelljs": "^0.8.1"
+  },
+  "bin": {
+    "create-plone-react-app": "index.js"
   }
 }

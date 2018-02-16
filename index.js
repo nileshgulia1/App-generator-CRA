@@ -3,6 +3,7 @@
 let shell = require('shelljs')
 let colors = require('colors')
 let fs = require('fs') 
+let templates = require('./templates/templates.js')
 
 //functions container
 
@@ -21,11 +22,12 @@ const run = async () => {
   console.log("All done")
 }
 
-run() 
+ 
 const createReactApp = () => {
   return new Promise(resolve=>{
     if(appName){ //If appname provided then execute CRA command
-      shell.exec(`create-react-app ${appName}`, () => {
+      shell.exec(`create-plone-react-app ${appName}`, (code) => {
+        console.log("Exited with code ", code)
         console.log("Created react app")
         resolve(true)
       })
@@ -49,9 +51,11 @@ const createReactApp = () => {
   */
 const cdIntoNewApp = () => {
   return new Promise(resolve=>{
-    shell.exec(`cd ${appName}`, ()=>{resolve()})
+    shell.cd(appDirectory)
+    resolve()
   })
 }
+
 const installPackages = () => {
   return new Promise(resolve=>{
     console.log("\n@plone/plone-react,plonetheme-webpack-plugin, webpack \n")
@@ -61,3 +65,19 @@ const installPackages = () => {
     })
   })
 }
+const updateTemplates = () => {
+  return new Promise(resolve=>{
+    let promises = []
+    Object.keys(templates).forEach((fileName, i)=>{
+      promises[i] = new Promise(res=>{
+        fs.writeFile(`${appDirectory}/src/${fileName}`, templates[fileName], function(err) {
+            if(err) { return console.log(err) }
+            res()
+        })
+      })
+    })
+    Promise.all(promises).then(()=>{resolve()})
+  })
+}
+
+run()
