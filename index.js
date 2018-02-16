@@ -1,14 +1,11 @@
 #!/usr/bin/env node
-
 let shell = require('shelljs')
 let colors = require('colors')
-let fs = require('fs') 
+let fs = require('fs')
 let templates = require('./templates/templates.js')
 
-//functions container
-
-let appName = process.argv[2] //it  will pull the provided app name out of the parameters of our shell command.
-let appDirectory = `${process.cwd()}/${appName}` //store the path to the directory that CRA is going to create.
+let appName = process.argv[2]
+let appDirectory = `${process.cwd()}/${appName}`
 
 const run = async () => {
   let success = await createReactApp()
@@ -22,16 +19,14 @@ const run = async () => {
   console.log("All done")
 }
 
- 
 const createReactApp = () => {
   return new Promise(resolve=>{
-    if(appName){ //If appname provided then execute CRA command
-      shell.exec(`create-plone-react-app ${appName}`, (code) => {
+    if(appName){
+      shell.exec(`create-react-app ${appName}`, (code) => {
         console.log("Exited with code ", code)
         console.log("Created react app")
         resolve(true)
       })
-
     }else{
       console.log("\nNo app name was provided.".red)
       console.log("\nProvide an app name in the following format: ")
@@ -40,15 +35,7 @@ const createReactApp = () => {
     }
   })
 }
-// Display the most elegant way to cd.
-/*
-  let cdpath;
-  if (appDirectory && path.join(appDirectory, appName) === appPath) {
-    cdpath = appName;
-  } else {
-    cdpath = appPath;
-  }
-  */
+
 const cdIntoNewApp = () => {
   return new Promise(resolve=>{
     shell.cd(appDirectory)
@@ -58,13 +45,14 @@ const cdIntoNewApp = () => {
 
 const installPackages = () => {
   return new Promise(resolve=>{
-    console.log("\n@plone/plone-react,plonetheme-webpack-plugin, webpack \n")
+    console.log("\nInstalling @plone/plone-react,plonetheme-webpack-plugin, webpack \n".cyan)
     shell.exec(`npm install --save  @plone/plone-react plonetheme-webpack-plugin webpack`, () => {
-      console.log("\nFinished installing packages\n")
+      console.log("\nFinished installing packages\n".green)
       resolve()
     })
   })
 }
+
 const updateTemplates = () => {
   return new Promise(resolve=>{
     let promises = []
