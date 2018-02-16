@@ -1,6 +1,9 @@
 # App-generator-CRA
 A simple Plone-app generator like create-react-app<br>
-##### Use it:
+##### Now available as an npm package
+`npm i -g create-plone-react-app`<r>
+      or<r>
+##### Use it by cloning:
 `git clone https://github.com/nileshgulia1/App-generator-CRA/`<br>
 `cd App-generator-CRA`<br>
 `npm link` so that it is availble in your system as registered.<br>
