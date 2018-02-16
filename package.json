@@ -8,7 +8,7 @@
     "dev-start": "nodemon index.js"
   },
   "repository": {
-    "type":"git",
+    "type": "git",
     "url": "https://github.com/nileshgulia1/App-generator-CRA"
   },
   "keywords": [],
