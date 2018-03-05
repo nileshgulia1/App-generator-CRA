@@ -18,7 +18,7 @@ const run = async () => {
   await updateTemplates()
   console.log("All done")
 }
-
+//Execute CRA command
 const createReactApp = () => {
   return new Promise(resolve=>{
     if(appName){
@@ -35,14 +35,14 @@ const createReactApp = () => {
     }
   })
 }
-
+//cd into new dir
 const cdIntoNewApp = () => {
   return new Promise(resolve=>{
     shell.cd(appDirectory)
     resolve()
   })
 }
-
+//install required packages
 const installPackages = () => {
   return new Promise(resolve=>{
     console.log("\nInstalling @plone/plone-react,plonetheme-webpack-plugin, webpack \n".cyan)
@@ -52,7 +52,7 @@ const installPackages = () => {
     })
   })
 }
-
+//iterate through and update templates
 const updateTemplates = () => {
   return new Promise(resolve=>{
     let promises = []
